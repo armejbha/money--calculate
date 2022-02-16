@@ -3,29 +3,42 @@ function getInputAmount(inputId) {
     const amount = document.getElementById(inputId).value;
     const amountValue = parseInt(amount);
     if (isNaN(amountValue)) {
-        alert('please a number');
+        alert('please a valid number');
     }
-    return amountValue;
+    else {
+        return amountValue;
+    }
 }
 function totalCostAmount() {
     const foodCost = getInputAmount('food-input');
     const rentCost = getInputAmount('rent-input');
     const clothesCost = getInputAmount('clothes-input');
     const totalCost = foodCost + rentCost + clothesCost;
-    const totalCostInner = document.getElementById('total-expenses').innerText = totalCost;
     return totalCost;
 }
-document.getElementById('cost-button').addEventListener('click', function () {
+function getBalance() {
     const incomeAmount = getInputAmount('income-input');
     if (totalCostAmount() > incomeAmount) {
         alert('please decreae your cost');
     }
     else {
         const totalBalance = incomeAmount - totalCostAmount();
-        const balance = document.getElementById('balance').innerText = totalBalance;
+        return totalBalance;
     }
+}
+// const calculate button 
+document.getElementById('cost-button').addEventListener('click', function () {
+    document.getElementById('total-expenses').innerText = totalCostAmount();
+    document.getElementById('balance').innerText = getBalance();
 })
-// saving calculate 
-document.getElementById('saving-calculate').addEventListener('click', function () {
 
+// saving calculate 
+
+// saving calculate botton 
+document.getElementById('saving-calculate').addEventListener('click', function () {
+    const percent = getInputAmount('percent-input');
+    const savingAmount = totalCostAmount() - (percent / 100);
+    document.getElementById('saving').innerText = savingAmount;
+    const remainingAmount = getBalance() - savingAmount;
+    document.getElementById('remaining').innerText = remainingAmount;
 })
