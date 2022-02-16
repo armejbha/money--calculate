@@ -37,8 +37,15 @@ document.getElementById('cost-button').addEventListener('click', function () {
 // saving calculate botton 
 document.getElementById('saving-calculate').addEventListener('click', function () {
     const percent = getInputAmount('percent-input');
-    const savingAmount = totalCostAmount() - (percent / 100);
-    document.getElementById('saving').innerText = savingAmount;
-    const remainingAmount = getBalance() - savingAmount;
-    document.getElementById('remaining').innerText = remainingAmount;
+    let incomeAmount = getInputAmount('income-input');
+    const savingAmount = incomeAmount * percent / 100;
+    document.getElementById('saving').innerText = parseInt(savingAmount);
+    if (getBalance() < savingAmount) {
+        alert('Oop! you can not save money');
+        document.getElementById('saving').innerText = '';
+    }
+    else {
+        const remainingAmount = getBalance() - savingAmount;
+        document.getElementById('remaining').innerText = parseInt(remainingAmount);
+    }
 })
