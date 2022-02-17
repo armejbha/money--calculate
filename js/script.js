@@ -59,26 +59,27 @@ document.getElementById('cost-button').addEventListener('click', function () {
 })
 // saving and remainig button 
 document.getElementById('saving-calculate').addEventListener('click', function () {
-    const savingBalance = document.getElementById('saving');
-    const savingInner = savingBalance.innerText;
-    const incomeAmount = parseInt(getInputAmount('income'));
+    const incomeIntiger = parseInt(getInputAmount('income'));
     const percent = parseInt(getInputAmount('percent'));
     if (percent < 0) {
-        return alert('please enter a valid number');
+        return alert('please enter a valid number!');
     }
-    const savingAmount = incomeAmount * percent / 100;
-    if (isNaN(savingAmount)) {
-        return alert('please enter a valid number');
+    if (isNaN(percent)) {
+        return alert('pleese enter a valid number!');
+    }
+    const savingBalance = document.getElementById('saving');
+    const savingInner = savingBalance.innerText;
+
+    if (isNaN(incomeIntiger)) {
+        savingBalance.innerText = savingInner;
     }
     else {
-        if (isNaN(percent)) {
-            return alert('please enter a valid number');
-        }
+        const savingAmount = incomeIntiger * percent / 100;
         savingBalance.innerText = savingAmount;
-        const cost = getTotalCost();
-        const balance = incomeAmount - cost;
         // remaining balance calculate 
         const remainingBalance = document.getElementById('remaining');
+        const cost = getTotalCost();
+        const balance = incomeIntiger - cost;
         if (savingAmount > balance) {
             return alert('you can not save money');
         }
